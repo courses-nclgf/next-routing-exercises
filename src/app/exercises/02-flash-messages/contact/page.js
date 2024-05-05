@@ -1,10 +1,21 @@
-'use client';
-import React from 'react';
+"use client";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { ToastContext } from "../../../../components/ToastProvider";
 
 function ContactPage() {
+  const router = useRouter();
+  const { createToast } = React.useContext(ToastContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push("/exercises/02-flash-messages");
+    createToast("Message sent successfully!", "success");
+  };
+
   return (
     <main>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input id="name" required={true} />
 
